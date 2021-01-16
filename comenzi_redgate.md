@@ -4,13 +4,12 @@ sudo yum install -y docker docker-compose
 git init
 git add README.md comenzi_redgate.md
 git commit -m "redgate comnenzi"
-git branch -M main
 git remote add origin https://github.com/pandelegeorge/redgate.git
 git config --global user.name "pandelegeorge"
 git config --global user.email "pandelegeorge@gmail.com"
 git config --global --list
 git config credential.helper store
-git push -u origin main
+git push -u origin master
 systemctl enable docker.service
 systemctl start docker.service
 systemctl status docker.service
