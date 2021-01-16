@@ -9,7 +9,6 @@ git config --global user.name "pandelegeorge"
 git config --global user.email "pandelegeorge@gmail.com"
 git config --global --list
 git config credential.helper store
-git push https://github.com/pandelegeorge/redgate.git
 git push -u origin main
 systemctl enable docker.service
 systemctl start docker.service
