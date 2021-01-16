@@ -124,7 +124,7 @@ docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/fl
 
 docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/flyway/confdir:/flyway/conf -v /home/ec2-user/flyway/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 baseline
 
-docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/flyway/confdir:/flyway/conf -v /home/ec2-user/flyway/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 migrate
+docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/flyway/confdir:/flyway/conf -v /home/ec2-user/flyway/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 -baselineOnMigrate="true" migrate
 #######################################################################
 
 ###########################Redgate Change Control###########################
