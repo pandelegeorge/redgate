@@ -1,5 +1,6 @@
 ########################INSTALL/CONFIGURE DOCKER################################
 sudo yum install -y git
+sudo yum install -y docker docker-compose
 git init
 git add README.md comenzi_redgate.md
 git commit -m "redgate comnenzi"
@@ -14,12 +15,17 @@ systemctl enable docker.service
 systemctl start docker.service
 systemctl status docker.service
 
-########################Create/Activate HR schema in docker hub Oracle database#########################
-docker login
-docker run -d -it --name dbmigoracle -p 1521:1521 -v OracleDatabase:/ORCL store/oracle/database-enterprise:12.2.0.1
-docker logs dbmigoracle
 
-docker exec -it dbmigoracle bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+docker login
+      Username: pandelegeorge
+      Password: <keepass>
+
+########################Create/Activate HR schema in Dev Database #########################
+docker run -d -it --name dbdevelopment -p 1521:1521 -v OracleDatabaseDevelopment:/ORCL store/oracle/database-enterprise:12.2.0.1
+
+docker logs dbdevelopment
+
+docker exec -it dbdevelopment bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
 
 # Use pluggable DB
 alter session set container = ORCLPDB1;
@@ -46,22 +52,23 @@ GRANT ALL PRIVILEGES TO HR;
 
 #######################################################################
 
-##################Redgate shadow control##############################
+##################Redgate shadow HR schema##############################
 
+docker run -d -it --name dbshadow -p 1522:1521 store/oracle/database-enterprise:12.2.0.1
 
-docker exec -it dbmigoracle bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+docker logs dbshadow
+
+docker exec -it dbshadow bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
 
 # Use pluggable DB
 alter session set container = ORCLPDB1;
 
-CREATE USER HRSHADOW
-  IDENTIFIED BY pwd4hrshadow
+CREATE USER HR
+  IDENTIFIED BY hr123
   DEFAULT TABLESPACE users
   TEMPORARY TABLESPACE temp;
 
-
-
-GRANT ALL PRIVILEGES TO HRSHADOW;
+GRANT ALL PRIVILEGES TO HR;
 
 ###########################################################################
 
@@ -76,14 +83,15 @@ Username: hr
 Password: hr123
 
 Hostname: localhost
-Port: 1521
+Port: 1522
 Service name: ORCLPDB1.localdomain
 
 ######################################################################
 
-###################REDGATE Change Control Prod Database#################
+###################REDGATE Prod Database#################
 
-docker run -d -it --name dbprod -p 1522:1521 -v OracleDatabaseProd:/ORCL store/oracle/database-enterprise:12.2.0.1
+docker run -d -it --name dbprod -p 1523:1521 -v OracleDatabaseProd:/ORCL store/oracle/database-enterprise:12.2.0.1
+
 docker logs dbprod
 
 docker exec -it dbprod bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
