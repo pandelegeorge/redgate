@@ -119,15 +119,6 @@ ALTER USER HR IDENTIFIED BY hr123;
 
 GRANT ALL PRIVILEGES TO HR;
 
-
-
-Windows AWS Admin Password: &TKI$%rzYuMsvRG.7-fhIjsFsd2PjlI;
-
-
-
-
-
-
 ###########################FLYWAY ORACLE#############################
 https://hub.docker.com/r/flyway/flyway - link documentation
 docker run --rm -v /home/ec2-user/oracle_db_migration/flyway/sqldir:/flyway/sql -v /home/ec2-user/oracle_db_migration/flyway/confdir:/flyway/conf -v /home/ec2-user/oracle_db_migration/flyway/driverdir:/flyway/drivers flyway/flyway info
