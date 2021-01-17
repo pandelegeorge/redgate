@@ -120,11 +120,11 @@ GRANT ALL PRIVILEGES TO HR;
 
 ###########################FLYWAY ORACLE#############################
 https://hub.docker.com/r/flyway/flyway - link documentation
-docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/flyway/confdir:/flyway/conf -v /home/ec2-user/flyway/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 info
 
-docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/flyway/confdir:/flyway/conf -v /home/ec2-user/flyway/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 baseline
+docker run --rm -v /home/ec2-user/hr_redgate/sqldir:/flyway/sql -v /home/ec2-user/hr_redgate/confdir:/flyway/conf -v /home/ec2-user/hr_redgate/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 info
 
-docker run --rm -v /home/ec2-user/flyway/sqldir:/flyway/sql -v /home/ec2-user/flyway/configdir:/flyway/conf -v /home/ec2-user/flyway/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 -baselineOnMigrate="true" migrate
+docker run --rm -v /home/ec2-user/hr_redgate/sqldir:/flyway/sql -v /home/ec2-user/hr_redgate/confdir:/flyway/conf -v /home/ec2-user/hr_redgate/driverdir:/flyway/drivers flyway/flyway -url=jdbc:oracle:thin:@//172.31.29.27:1523/ORCLPDB1.localdomain -user=HR -password=hr123 -baselineOnMigrate="true" migrate
+
 #######################################################################
 
 ###########################Redgate Change Control###########################
