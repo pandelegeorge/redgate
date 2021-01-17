@@ -1,0 +1,1 @@
+ALTER TABLE hr.countries RENAME COLUMN cod_tara to cod;
