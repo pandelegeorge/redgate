@@ -1,0 +1,1 @@
+Here will be copied the file from git repository sql migration
