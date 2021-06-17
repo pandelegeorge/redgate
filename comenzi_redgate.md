@@ -15,7 +15,7 @@ systemctl start docker.service
 systemctl status docker.service  
 
 
-#########################################################################################
+#########################################################################################  
 docker login  
       Username: pandelegeorge  
       Password: <keepass>  
