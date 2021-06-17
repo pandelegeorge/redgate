@@ -1,4 +1,4 @@
-########################INSTALL/CONFIGURE DOCKER################################
+########################INSTALL/CONFIGURE DOCKER################################  
 sudo yum install -y git  
 sudo yum install -y docker docker-compose  
 git init  
