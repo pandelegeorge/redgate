@@ -90,10 +90,14 @@ docker login
           (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))``` 
    
 1. Login in SQL 
-    ```docker exec -it dbshadow bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"```
+    ```
+      docker exec -it dbshadow bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+    ```
 
 1. Use pluggable DB
-    ```alter session set container = ORCLPDB1;```
+    ```
+      alter session set container = ORCLPDB1;
+    ```
 
 1. Create an HR user schema. This schema name should be the same as in development and production database
   ```
@@ -103,34 +107,45 @@ docker login
     TEMPORARY TABLESPACE temp;
   ```
 1. Grant all privleges to HR user
-    ```GRANT ALL PRIVILEGES TO HR;```
+    ```
+      GRANT ALL PRIVILEGES TO HR;
+   ```
 
 ###########################################################################
 
 ###################REDGATE Prod Database#################
 
 1. Create production oracle database instance
-  ```docker run -d -it --name dbprod -p 1523:1521 -v OracleDatabaseProd:/ORCL store/oracle/database-enterprise:12.2.0.1```
+  ```
+      docker run -d -it --name dbprod -p 1523:1521 -v OracleDatabaseProd:/ORCL store/oracle/database-enterprise:12.2.0.1
+  ```
 
 1. docker logs dbprod - execute this command multiple time untill you'll see below output
-  ```Done ! The database is ready for use .
+  ```
+      Done ! The database is ready for use .
     # ===========================================================================  
     # == Add below entries to your tnsnames.ora to access this database server ==  
     # ====================== from external host =================================  
     ORCLCDB=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>))
         (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))     
     ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>))
-        (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))```
+        (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))
+  ```
 
 1. Login in SQL 
-    ```docker exec -it dbprod bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"```
+    ```
+      docker exec -it dbprod bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+    ```
 
 1. Use pluggable DB
-    ```alter session set container = ORCLPDB1;```
+    ```
+      alter session set container = ORCLPDB1;
+    ```
 
 1. kick start HR schema scripts
 
-    ```@?/demo/schema/human_resources/hr_main.sql;
+    ```
+    @?/demo/schema/human_resources/hr_main.sql;
     specify password for HR as parameter 1:
     Enter value for 1: hr123
 
@@ -141,12 +156,15 @@ docker login
     Enter value for 3: temp
 
     specify log path as parameter 4:
-    Enter value for 4: log```
+    Enter value for 4: log
+   ```
 
 1.  Unlock HR acount and set password 
-    ```SQL> ALTER USER HR ACCOUNT UNLOCK IDENTIFIED BY hr123;
+    ```
+      SQL> ALTER USER HR ACCOUNT UNLOCK IDENTIFIED BY hr123;
        SQL> ALTER USER HR IDENTIFIED BY hr123;
-       SQL> GRANT ALL PRIVILEGES TO HR;```
+       SQL> GRANT ALL PRIVILEGES TO HR;
+    ```
 
 
 ##################SQL developer connection#################################
