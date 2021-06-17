@@ -40,13 +40,16 @@ docker login
           (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))```   
 
 1. Login in SQL
-   ```docker exec -it dbdevelopment bash -c "source /home/oracle/.bashrc; sqlplus sys/  Oradoc_db1@ORCLCDB as sysdba"```
+   ```docker exec -it dbdevelopment bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"```
 
 1. Use pluggable DB
-  ``` SQL> alter session set container = ORCLPDB1;```
+  ``` 
+      SQL> alter session set container = ORCLPDB1;
+  ```
 
 1. kick start HR schema scripts
-    ```SQL> @?/demo/schema/human_resources/hr_main.sql;
+    ```
+      SQL> @?/demo/schema/human_resources/hr_main.sql;
     specify password for HR as parameter 1:
     Enter value for 1: hr123
 
@@ -57,11 +60,14 @@ docker login
     Enter value for 3: temp
 
     specify log path as parameter 4:
-    Enter value for 4: log```
+    Enter value for 4: log
+   ```
 
 1. Unlock HR acount and set password
-  ```ALTER USER HR ACCOUNT UNLOCK IDENTIFIED BY hr123;
-     GRANT ALL PRIVILEGES TO HR;```
+  ```
+      ALTER USER HR ACCOUNT UNLOCK IDENTIFIED BY hr123;
+     GRANT ALL PRIVILEGES TO HR;
+  ```
 
 #######################################################################
 
@@ -69,7 +75,9 @@ docker login
 
 1. Create shadow oracle database instance this is specially for Redgate
 
-   ```docker run -d -it --name dbshadow -p 1522:1521 store/oracle/database-enterprise:12.2.0.1```
+   ```
+      docker run -d -it --name dbshadow -p 1522:1521 store/oracle/database-enterprise:12.2.0.1
+   ```
 
 1. `docker logs dbshadow` - execute this command multiple time untill you'll see below output
     ```Done ! The database is ready for use .
