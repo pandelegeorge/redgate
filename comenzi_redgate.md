@@ -15,10 +15,14 @@ systemctl start docker.service
 systemctl status docker.service  
 
 
-docker login
-      Username: pandelegeorge
-      Password: <keepass>
+#########################################################################################
+docker login  
+      Username: pandelegeorge  
+      Password: <keepass>  
+###########################################################################################
 
+      
+      
 ########################Create/Activate HR schema in Dev Database #########################
 
 1. Create development oracle database instance
